@@ -30,6 +30,10 @@ public class Main {
         File attachment = null;
         if (commandLine.hasOption("attachment")) {
             attachment = new File(commandLine.getOptionValue("attachment"));
+            if (!attachment.exists()){
+                System.err.println("Attachment file not exists.");
+                return;
+            }
         }
 
         if (gmailService.sendMessage(recipient, subject, bodyText, attachment)) {
